@@ -6,7 +6,7 @@
 
     <groupId>io.kx</groupId>
     <artifactId>proto-lib</artifactId>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
 
     <properties>
         <jdk.target>11</jdk.target>
@@ -18,12 +18,8 @@
 
     <build>
         <resources>
-            <!-- Add the generated protobuf descriptor to the classpath, so that source mapping works -->
             <resource>
-                <directory>${project.build.directory}/generated-resources</directory>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/proto</directory>
             </resource>
         </resources>
 
@@ -35,37 +31,6 @@
             </extension>
         </extensions>
 
-        <plugins>
-            <plugin>
-                <groupId>org.xolstice.maven.plugins</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <version>0.6.1</version>
-                <executions>
-                    <execution>
-                        <id>protobuf</id>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                        <configuration>
-                            <protocArtifact>com.google.protobuf:protoc:3.19.2:exe:${os.detected.classifier}</protocArtifact>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
     </build>
 
     <dependencies>
